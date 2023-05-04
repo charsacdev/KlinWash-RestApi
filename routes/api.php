@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserAuth;
 use App\Http\Controllers\UserProfile;
+use App\Http\Controllers\UserHomeView;
+use App\Http\Controllers\UserOrders;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,15 +37,14 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     #add management
     Route::post('add_address',[UserProfile::class,'AddAddress']);
-    Route::get('delete_address/{id}',[UserProfile::class,'DeleteAddress']);
+    Route::delete('delete_address/{id}',[UserProfile::class,'DeleteAddress']);
 
+    #getting all services
+    Route::get('all_services',[UserHomeView::class,'get_services']);
+    Route::get('get_all_category/{id}',[UserHomeView::class,'get_services_categories']);
 
-
-    //bank information
-    Route::get('allbanks',[BuisnessProfile::class,'BanksInfo']);
-    Route::post('UpdateBankInformation',[BuisnessProfile::class,'BankAccountInformation']);
-    
-
+    #adding to cart
+    Route::get('add_to_cart/{id}',[UserOrders::class,'AddToCart']);
 
     
 });

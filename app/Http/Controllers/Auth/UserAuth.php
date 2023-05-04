@@ -235,16 +235,14 @@ class UserAuth extends Controller
                 $rules = [
                     'code'=>'required|numeric',
                     'email' => 'required|email',
-                    'password' => 'required|string|required_with:password_confirmed|same:password_confirmed|min:8',
-                    'password_confirmed'=>'min:8',
-                    
+                    'password' => 'required|string|min:8',
+                
                 ];
 
                 $messages = [
                     'code.required'=>'Enter code sent to registered email !',
                     'email.required' => 'Enter email reset code was send to !',
                     'password.required'=>'Password is required to proceed !',
-                    'password.same'=>'Password does not match please check again !',
                 ];
 
                 # Validate the request

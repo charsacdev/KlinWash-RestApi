@@ -13,4 +13,8 @@ class users_Tables extends Authenticatable
     use HasFactory,HasApiTokens,SoftDeletes;
 
     protected $guarded = [];
+
+    protected static function newFactory(){
+    return \Database\Factories\UserTablesFactory::new();
+   }
 }

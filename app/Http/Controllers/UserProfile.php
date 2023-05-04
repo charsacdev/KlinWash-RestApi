@@ -156,15 +156,15 @@ class UserProfile extends Controller
         try{
             $rules = [
                 'old_password' => 'required',
-                'new_password' => 'required|string|required_with:password_confirmed|same:password_confirmed|min:8',
-                'password_confirmed'=>'min:8',
+                'new_password' => 'required|string|min:8',
+        
     
             ];
     
             $messages = [
                 'old_password.required'=>'Old Password is required to proceed !',
                 'new_password.required'=>'Password is required to proceed !',
-                'new_password.same'=>'Password does not match please check again !',
+                'new_password.min'=>'Password must contain 8 character !',
     
             ];
 

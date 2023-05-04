@@ -17,6 +17,7 @@ class CreateServicesAdminTablesTable extends Migration
             $table->id();
             $table->string('service_type');
             $table->string('services_image');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

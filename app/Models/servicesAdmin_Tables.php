@@ -11,4 +11,8 @@ class servicesAdmin_Tables extends Model
     use HasFactory,SoftDeletes;
 
     protected $guarded = [];
+
+    protected static function newFactory(){
+      return \Database\Factories\AdminServiceTableFactory::new();
+    }
 }

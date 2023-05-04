@@ -3,16 +3,18 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\Models\users_Tables;
+use App\Models\servicesAdmin_Tables;
+use App\Models\ServiceCategory;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
+   
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        #users_Tables::factory(100)->create();
+        #servicesAdmin_Tables::factory(6)->create();
+        ServiceCategory::factory(15)->create();
     }
 }

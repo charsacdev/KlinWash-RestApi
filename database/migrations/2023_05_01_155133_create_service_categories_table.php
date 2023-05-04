@@ -15,9 +15,11 @@ class CreateServiceCategoriesTable extends Migration
     {
         Schema::create('service_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('service_type');
+            $table->string('service_id');
+            $table->string('service_name');
             $table->string('services_catergory');
             $table->string('services_price');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
