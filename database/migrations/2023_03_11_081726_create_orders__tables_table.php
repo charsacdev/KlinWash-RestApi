@@ -23,7 +23,11 @@ class CreateOrdersTablesTable extends Migration
             $table->string('order_price');
             $table->string('order_tag_code');
             $table->string('order_status');
+            $table->string('pickup_date');
+            $table->string('delivery_date');
             $table->string('order_date');
+            $table->string('checkout_address');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

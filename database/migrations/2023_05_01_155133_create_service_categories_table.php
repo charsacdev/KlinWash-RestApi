@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServicesAdminTablesTable extends Migration
+class CreateServiceCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateServicesAdminTablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('services_admin__tables', function (Blueprint $table) {
+        Schema::create('service_categories', function (Blueprint $table) {
             $table->id();
             $table->string('service_type');
-            $table->string('services_image');
+            $table->string('services_catergory');
+            $table->string('services_price');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateServicesAdminTablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services_admin__tables');
+        Schema::dropIfExists('service_categories');
     }
 }

@@ -2,10 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UsercreateAccount;
-use App\Http\Controllers\UserLogin;
+use App\Http\Controllers\Auth\UserAuth;
 use App\Http\Controllers\UserProfile;
-use App\Http\Controllers\BuisnessProfile;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,28 +17,27 @@ use App\Http\Controllers\BuisnessProfile;
 */
 
 //----------USER AUTHENTCATION AND MANAGMENT-------------------//
-Route::post('/register',[UsercreateAccount::class,'register']);
-Route::post('/login', [UserLogin ::class,'login']);
-Route::post('/forgotpassword', [UserLogin ::class,'ForgotPassword']);
-Route::post('/newpassword', [UserLogin ::class,'Newpassword']);
+Route::post('/register',[UserAuth::class,'register']);
+Route::post('/login', [UserAuth ::class,'login']);
+Route::post('/forgotpassword', [UserAuth::class,'ForgotPassword']);
+Route::post('/newpassword', [UserAuth::class,'Newpassword']);
 
 
 
 
 Route::group(['middleware' => ['auth:sanctum']], function() {
 
-    //basic information for user
+    #basic information for user
     Route::get('userprofileInfo',[UserProfile::class,'BasicProfileInfo']);
     Route::post('userprofileUpdate',[UserProfile::class,'UpdateBasicInfo']);
     Route::post('userpassword',[UserProfile::class,'UpdatePasswordinfo']);
-    Route::post('getlocation',[UserProfile::class,'Getlocation']);
     Route::post('profilephoto',[UserProfile::class,'ProfilePhoto']);
 
-    //business information for user
-    Route::get('businessInfo',[BuisnessProfile::class,'BusinessProfileInfo']);
-    Route::post('businessInfoUpdate',[BuisnessProfile::class,'UpdateBasicInfo']);
-    Route::post('businessOwner',[BuisnessProfile::class,'BusinessOwners']);
-    Route::post('aboutus',[BuisnessProfile::class,'AboutBusiness']);
+    #add management
+    Route::post('add_address',[UserProfile::class,'AddAddress']);
+    Route::get('delete_address/{id}',[UserProfile::class,'DeleteAddress']);
+
+
 
     //bank information
     Route::get('allbanks',[BuisnessProfile::class,'BanksInfo']);

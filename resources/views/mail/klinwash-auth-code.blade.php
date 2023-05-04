@@ -1,31 +1,47 @@
-@component('mail::panel')
-KLN Wash Authentication Code
-@endcomponent
 @component('mail::message')
-<p>Dear&nbsp;<b>{{ucwords($username)}}</b> </p>
 
-<p>
-Thank you for choosing KLN Wash as your preferred laundry service provider. 
-As part of our commitment to ensuring the security of your account, 
-we require an authentication code to verify your identity and protect your personal information.
-</p>
- 
-<p>Your authentication code is: <b>{{$code}}</b></p>
- 
-<p>
-To complete the registration process, please enter the authentication code on the designated 
-field on our website. If you have any difficulty entering the code, 
-please feel free to contact our customer service team for assistance.
-</p>
- 
-<p>
-Please note that this authentication code is only valid for a limited time, 
-so we encourage you to enter it as soon as possible to avoid any delays in accessing our services.
-</p>
- 
-<p>Thank you for choosing KLN Wash. We look forward to serving you.</p>
+<div class="email-div">
+  <h1>KLN Wash Authentication Code</h1>
 
- 
-Best regards,<br>
-{{ config('app.name') }}
+  <aside class="aside-1">
+    <img src="{{asset('assets/emailicon.png')}}" class="emailicon">
+    <br>
+    <p>Hi,&nbsp;<b>{{ucwords($username)}}</b><br>
+        We prioritize your account's security and require an authentication code to safeguard your personal data. Kindly input the provided authentication code to finish the registration process.
+    </p>
+    <h2 style="text-align: center;font-size:30px">
+        [{{$code}}]
+    </h2>
+     <p style="text-align: center">
+        We look forward to serving you.Best regards,
+    </p>
+
+  </aside>
+
+  <aside class="aside-2">
+     <h4>Get the KlinWash app!</h4>
+     <p>Get the most of <b>klnwash by</b> installing the
+      mobile app. You can log in by using your
+      existing email and password
+     </p>
+     <article>
+       <img src="{{asset('assets/apple.png')}}">
+       <img src="{{asset('assets/google.png')}}">
+     </article>
+  </aside>
+  
+  <aside class="aside-3">
+    <article>
+      <img src="{{asset('assets/linkedin.png')}}">
+      <img src="{{asset('assets/twitter.png')}}">
+      <img src="{{asset('assets/facebook.png')}}">
+    </article>
+  </aside>
+
+  <aside class="aside-4">
+      <img src="{{asset('assets/Vector.png')}}">
+      <br>
+      <h4>{{ env('APP_BUSINESS') }}</h4>
+  </aside>
+</div>
 @endcomponent

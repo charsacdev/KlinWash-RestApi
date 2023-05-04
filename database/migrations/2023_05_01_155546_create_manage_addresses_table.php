@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServicesUserTablesTable extends Migration
+class CreateManageAddressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class CreateServicesUserTablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('services_user__tables', function (Blueprint $table) {
+        Schema::create('manage_addresses', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
-            $table->string('category');
-            $table->string('service_type');
-            $table->string('service_price');
-            $table->string('services_suspend');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('phone');
+            $table->string('address');
+            $table->string('state');
+            $table->string('lga');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ class CreateServicesUserTablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services_user__tables');
+        Schema::dropIfExists('manage_addresses');
     }
 }

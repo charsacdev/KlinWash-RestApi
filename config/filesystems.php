@@ -32,14 +32,16 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('C:\wamp64\www\KlinwashUploads'),
+            'root' => public_path('KlinwashUploads'),
+            'throw' => false,
         ],
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('..\..\KlinwashUploads'),
+            'root' => public_path('KlinwashUploads'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
+            'throw' => false,
         ],
 
         's3' => [
