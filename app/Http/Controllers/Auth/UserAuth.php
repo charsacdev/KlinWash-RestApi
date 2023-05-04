@@ -229,20 +229,17 @@ class UserAuth extends Controller
      }
 
 
-     #new password update
-     public function Newpassword(Request $request){
+     #confirm autocode update
+     public function RestCode(Request $request){
         try{
                 $rules = [
                     'code'=>'required|numeric',
                     'email' => 'required|email',
-                    'password' => 'required|string|min:8',
-                
                 ];
 
                 $messages = [
                     'code.required'=>'Enter code sent to registered email !',
                     'email.required' => 'Enter email reset code was send to !',
-                    'password.required'=>'Password is required to proceed !',
                 ];
 
                 # Validate the request
@@ -259,6 +256,50 @@ class UserAuth extends Controller
                         #update the auth_code in table
                         $updateAuthCode=users_Tables::where(['email'=>$request->email])->update([
                         'auth_code'=>$codeGen,
+                        ]);
+                        return response()->json([
+                            'reason' => 'code is correct',
+                            'code'=>'201',
+                        ], 201);
+                    }
+                    else{
+
+                        return response()->json([
+                            'reason' => 'Please recheck the code sent to your email address',
+                            'code'=>'201',
+                        ], 201);
+                    }
+                }
+            }
+            catch (\Throwable$th) {
+                return response(["code" => 3, "error" => $th->getMessage()]);
+            }
+     }
+
+     public function NewPassword(Request $request){
+        try{
+                $rules = [
+                    'email' => 'required|email',
+                    'password' => 'required|string|min:8',
+                
+                ];
+
+                $messages = [
+                    'email.required' => 'Enter email reset code was send to !',
+                    'password.required'=>'Password is required to proceed !',
+                ];
+
+                # Validate the request
+                $validator = Validator::make($request->all(), $rules,$messages);
+                if ($validator->fails()) {
+                    return response()->json(['errors' => $validator->errors()], 422);
+                }
+                else{
+                    #checking of email exist
+                    $user=users_Tables::where(['email'=>$request->email])->first();
+                    if($user){
+                        #update the password in table
+                        $updateAuthCode=users_Tables::where(['email'=>$request->email])->update([
                         'password'=>Hash::make($request->password)
 
                         ]);
@@ -280,7 +321,7 @@ class UserAuth extends Controller
                     else{
 
                         return response()->json([
-                            'reason' => 'Please recheck the code and email address',
+                            'reason' => 'An error occure check again please',
                             'code'=>'201',
                         ], 201);
                     }
@@ -294,7 +335,7 @@ class UserAuth extends Controller
 
      #logout code
      public function logout(Request $request){
-            $request->user()->token()->revoke();
+            $request->user()->tokens()->delete();
 
             return response()->json([
                 'message' => 'Successfully logged out'

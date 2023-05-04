@@ -275,6 +275,30 @@ class UserProfile extends Controller
     }
 
 
+    #get all address
+    public function getAddress(){
+        try{
+            $userId=auth()->user(); 
+            $getaddress=ManageAddress::where(['user_id'=>$userId->id])->get();
+            if($getaddress->count()>0){
+                return response()->json([
+                    'code'=>1,
+                    'address'=>$getaddress,
+                ], 200);
+            }else{
+                return response()->json([
+                    'code'=>2,
+                    'reason'=>'no new address added',
+                ], 200);
+            }
+
+
+        }catch (\Throwable$th) {
+            return response(["code" => 3, "error" => $th->getMessage()]);
+        }
+    }
+
+
     #delete address 
     public function DeleteAddress($id){
       try{

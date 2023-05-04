@@ -22,6 +22,7 @@ use App\Http\Controllers\UserOrders;
 Route::post('/register',[UserAuth::class,'register']);
 Route::post('/login', [UserAuth ::class,'login']);
 Route::post('/forgotpassword', [UserAuth::class,'ForgotPassword']);
+Route::post('/resetcode', [UserAuth::class,'RestCode']);
 Route::post('/newpassword', [UserAuth::class,'Newpassword']);
 
 
@@ -35,7 +36,8 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::post('userpassword',[UserProfile::class,'UpdatePasswordinfo']);
     Route::post('profilephoto',[UserProfile::class,'ProfilePhoto']);
 
-    #add management
+    #address management
+    Route::get('get_addresses',[UserProfile::class,'getAddress']);
     Route::post('add_address',[UserProfile::class,'AddAddress']);
     Route::delete('delete_address/{id}',[UserProfile::class,'DeleteAddress']);
 
@@ -45,6 +47,9 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     #adding to cart
     Route::get('add_to_cart/{id}',[UserOrders::class,'AddToCart']);
+
+    #logout
+    Route::get('logout',[UserAuth::class,'logout']);
 
     
 });
